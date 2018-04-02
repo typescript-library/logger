@@ -1,0 +1,29 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lteam18/logger.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lteam18/logger/issues"
+  },
+  "homepage": "https://github.com/lteam18/logger#readme",
+  "devDependencies": {
+    "@types/node": "^9.6.1",
+    "ts-lint": "^4.5.1",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.8.1",
+    "typescript-formatter": "^7.1.0"
+  },
+  "dependencies": {
+  }
+}
