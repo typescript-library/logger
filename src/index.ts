@@ -1,23 +1,29 @@
 export type LevelLoggerOption = {
     stack?: string;
     msg?: string;
-    status?: { [index: string]: any };
+    dict?: { [index: string]: any };
 };
 
 export type Serializer = (o: string) => void
 
 export type LOG_TYPE = "debug" | "info" | "warn" | "error" | "fatal" 
 
-
-
 export abstract class SERIALIZER_TYPE {
-    public abstract log(logType: string, o: LevelLoggerOption): void
+    public abstract log(logType: LevelType, o: LevelLoggerOption): void
     public abstract logStr(msg: string): void
 }
 
+// import * as time from "time"
+
 export class DefaultSerializer extends SERIALIZER_TYPE {
-    public log(logType: string, o: LevelLoggerOption): void {
-        console.log(JSON.stringify({ _L: logType, ...o }))
+    public log(logType: LevelType, o: LevelLoggerOption): void {
+        console.log(JSON.stringify({
+            T: Date.now(),
+            L: logType, 
+            M: o.msg,
+            D: o.dict,
+            S: o.stack
+         }))
     }
 
     public logStr(msg: string){
@@ -25,9 +31,13 @@ export class DefaultSerializer extends SERIALIZER_TYPE {
     }
 }
 
+export enum LevelType {
+    DEUBG, INFO, WARN, ERROR, FATAL
+}
+
 export class LevelLogger {
     constructor(
-        public readonly logType: string,
+        public readonly logType: LevelType,
         public s: SERIALIZER_TYPE = new DefaultSerializer()
     ) { }
 
@@ -43,16 +53,16 @@ export class LevelLogger {
         this.o({ msg, stack })
     }
 
-    msg_status(msg: string, status: { [index: string]: any }) { 
-        this.o({ msg, status })
+    msg_dict(msg: string, dict: { [index: string]: any }) { 
+        this.o({ msg, dict })
     }
 
-    msg_status_trace(
+    msg_dict_trace(
         msg: string,
-        status: { [index: string]: any },
+        dict: { [index: string]: any },
         stack: string
     ) { 
-        this.o({ msg, status, stack })
+        this.o({ msg, dict, stack })
     }
 
     trace(stack: string) {
@@ -99,34 +109,17 @@ export class HeartbeatLogger {
 
 export class Logger {
     // Very detailed infomation
-    public debug = new LevelLogger("debug");
-    public info = new LevelLogger("info");
+    public debug = new LevelLogger(LevelType.DEUBG);
+    public info = new LevelLogger(LevelType.INFO);
 
     // Warning
     // Some unoccasional situation, not important
-    public warn = new LevelLogger("warn");
+    public warn = new LevelLogger(LevelType.WARN);
 
     // Unexepected situation, handled or not
     // TODO: Issue established, explantion or solution MUST GIVEN
-    public error = new LevelLogger("error");
+    public error = new LevelLogger(LevelType.ERROR);
 
     // Error that resulted in exit
-    public fatal = new LevelLogger("fatal");
+    public fatal = new LevelLogger(LevelType.FATAL);
 }
-
-function main() {
-    const llo = new Logger();
-    llo.debug.o({
-        msg: "Program ready"
-    });
-
-    llo.debug.msg("123");
-    llo.debug.msg_status("123", {
-        status: "on"
-    });
-
-    llo.debug.trace(new Error("Here").stack || "Here")
-
-}
-
-main()
