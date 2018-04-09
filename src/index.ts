@@ -1,7 +1,7 @@
 export type LevelLoggerOption = {
     stack?: string;
     msg?: string;
-    dict?: { [index: string]: any };
+    data?: { [index: string]: any };
 };
 
 export type Serializer = (o: string) => void
@@ -21,7 +21,7 @@ export class DefaultSerializer extends SERIALIZER_TYPE {
             T: Date.now(),
             L: logType, 
             M: o.msg,
-            D: o.dict,
+            D: o.data,
             S: o.stack
          }))
     }
@@ -53,16 +53,16 @@ export class LevelLogger {
         this.o({ msg, stack })
     }
 
-    msg_dict(msg: string, dict: { [index: string]: any }) { 
-        this.o({ msg, dict })
+    msg_data(msg: string, data: { [index: string]: any }) { 
+        this.o({ msg, data })
     }
 
-    msg_dict_trace(
+    msg_data_trace(
         msg: string,
-        dict: { [index: string]: any },
+        data: { [index: string]: any },
         stack: string
     ) { 
-        this.o({ msg, dict, stack })
+        this.o({ msg, data, stack })
     }
 
     trace(stack: string) {

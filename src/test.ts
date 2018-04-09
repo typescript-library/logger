@@ -7,8 +7,8 @@ function main() {
     });
 
     llo.debug.msg("123");
-    llo.debug.msg_dict("123", {
-        dict: "on"
+    llo.debug.msg_data("123", {
+        status: "on"
     });
 
     llo.warn.trace(new Error("Here").stack || "Here")
