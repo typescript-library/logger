@@ -16,11 +16,11 @@ export class HeartbeatLogger {
     }
 
     def(msg: string, data: { [index: string]: any }) {
-        this.s.logStr(`H${this.hid}${JSON.stringify(this.data)}`)
+        this.s.defineHeart(this.hid, this.data)
     }
 
     beat(msg: string, status: { [index: string]: any }) {
-        this.s.logStr(`B${this.hid}`)
+        this.s.beat(this.hid)
     }
 
 }

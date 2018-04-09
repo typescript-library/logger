@@ -4,12 +4,12 @@ import * as ser from "../Serializer"
 export class StatusLogger {
     constructor(
         public s: ser.SERIALIZER_TYPE,
-        public Schema: { [index: string]: string }
+        public schema: { [index: string]: string }
     ) {
-        this.s.logStr("D" + JSON.stringify(Schema))
+        this.s.defineStatus(schema)
     }
 
     rec(status: { [index: string]: any }) {
-        this.s.logStr("S" + JSON.stringify(status))
+        this.s.rec(status)
     }
 }
