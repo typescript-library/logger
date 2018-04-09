@@ -8,14 +8,31 @@ export type Serializer = (o: string) => void
 
 export type LOG_TYPE = "debug" | "info" | "warn" | "error" | "fatal" 
 
+
+
+export abstract class SERIALIZER_TYPE {
+    public abstract log(logType: string, o: LevelLoggerOption): void
+    public abstract logStr(msg: string): void
+}
+
+export class DefaultSerializer extends SERIALIZER_TYPE {
+    public log(logType: string, o: LevelLoggerOption): void {
+        console.log(JSON.stringify({ _L: logType, ...o }))
+    }
+
+    public logStr(msg: string){
+        console.log(msg)
+    }
+}
+
 export class LevelLogger {
     constructor(
         public readonly logType: string,
-        public s: Serializer = console.log.bind(console)
+        public s: SERIALIZER_TYPE = new DefaultSerializer()
     ) { }
 
     o(o: LevelLoggerOption) {
-        return this.s(JSON.stringify(o));
+        return this.s.log( this.logType, o );
     }
 
     msg(msg: string) { 
@@ -63,7 +80,7 @@ export class StatusLogger {
 export class HeartbeatLogger {
 
     constructor(
-        public s: Serializer = console.log.bind(console),
+        public s: SERIALIZER_TYPE = new DefaultSerializer(),
         public msg: string,
         public status: { [index: string]: any },
         public hid: string
@@ -71,11 +88,11 @@ export class HeartbeatLogger {
     }
 
     def(msg: string, status: { [index: string]: any }) {
-        this.s(`H${this.hid}${JSON.stringify(this.status)}`)
+        this.s.logStr(`H${this.hid}${JSON.stringify(this.status)}`)
     }
 
     beat(msg: string, status: { [index: string]: any }) {
-        this.s(`B${this.hid}`)
+        this.s.logStr(`B${this.hid}`)
     }
 
 }
