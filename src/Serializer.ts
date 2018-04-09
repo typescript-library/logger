@@ -8,8 +8,8 @@ export abstract class SERIALIZER_TYPE {
     public abstract beat(hid: number): void
 
     // Status
-    public abstract defineStatus(Schema: { [index: string]: string }): void
-    public abstract rec(status: { [index: string]: any }): void
+    public abstract defineStatus(sid: number, Schema: { [index: string]: string }): void
+    public abstract rec(sid: number, status: { [index: string]: any }): void
     
 }
 
@@ -42,12 +42,12 @@ export class DefaultSerializer extends SERIALIZER_TYPE {
         this.write(`B${hid}`)
     }
 
-    defineStatus(Schema: { [index: string]: string }){
-        this.write("D" + JSON.stringify(Schema))
+    defineStatus(sid: number, Schema: { [index: string]: string }){
+        this.write(`D${sid}` + JSON.stringify(Schema))
     }
 
-    rec(status: { [index: string]: any }) {
-        this.write("S" + JSON.stringify(status))
+    rec(sid: number, status: { [index: string]: any }) {
+        this.write(`S${sid}` + JSON.stringify(status))
     }
 
 }
