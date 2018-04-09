@@ -76,29 +76,33 @@ export class LevelLogger {
 
 export class StatusLogger {
     constructor(
-        public s: Serializer = console.log.bind(console),
+        public s: SERIALIZER_TYPE,
         public Schema: { [index: string]: string }
     ) {
-        this.s("D" + JSON.stringify(Schema))
+        this.s.logStr("D" + JSON.stringify(Schema))
     }
 
     rec(status: { [index: string]: any }) {
-        this.s("S" + JSON.stringify(status))
+        this.s.logStr("S" + JSON.stringify(status))
     }
 }
 
 export class HeartbeatLogger {
 
+    static HID = 0
+    public readonly hid: number
+
     constructor(
         public s: SERIALIZER_TYPE = new DefaultSerializer(),
         public msg: string,
-        public status: { [index: string]: any },
-        public hid: string
+        public data: { [index: string]: any }
     ) {
+        this.hid = HeartbeatLogger.HID ++
+        this.def(msg, data)
     }
 
-    def(msg: string, status: { [index: string]: any }) {
-        this.s.logStr(`H${this.hid}${JSON.stringify(this.status)}`)
+    def(msg: string, data: { [index: string]: any }) {
+        this.s.logStr(`H${this.hid}${JSON.stringify(this.data)}`)
     }
 
     beat(msg: string, status: { [index: string]: any }) {
@@ -108,18 +112,35 @@ export class HeartbeatLogger {
 }
 
 export class Logger {
+
+    constructor(public readonly s: SERIALIZER_TYPE = new DefaultSerializer()){
+        
+    }
+
     // Very detailed infomation
-    public debug = new LevelLogger(LevelType.DEUBG);
-    public info = new LevelLogger(LevelType.INFO);
+    public debug = new LevelLogger(LevelType.DEUBG, this.s);
+    public info = new LevelLogger(LevelType.INFO, this.s);
 
     // Warning
     // Some unoccasional situation, not important
-    public warn = new LevelLogger(LevelType.WARN);
+    public warn = new LevelLogger(LevelType.WARN, this.s);
 
     // Unexepected situation, handled or not
     // TODO: Issue established, explantion or solution MUST GIVEN
-    public error = new LevelLogger(LevelType.ERROR);
+    public error = new LevelLogger(LevelType.ERROR, this.s);
 
     // Error that resulted in exit
-    public fatal = new LevelLogger(LevelType.FATAL);
+    public fatal = new LevelLogger(LevelType.FATAL, this.s);
+
+    defineHeatbeatLogger(
+        msg: string,
+        data: { [index: string]: any }
+    ){
+        return new HeartbeatLogger(this.s, msg, data)
+    }
+
+    defineStatusLogger(Schema: { [index: string]: string }){
+        return new StatusLogger(this.s, Schema)
+    }
+
 }
