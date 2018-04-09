@@ -6,27 +6,44 @@ export type LevelLoggerOption = {
 
 export type Serializer = (o: string) => void
 
+export type LOG_TYPE = "debug" | "info" | "warn" | "error" | "fatal" 
+
 export class LevelLogger {
-    constructor(public s: Serializer = console.log.bind(console)) { }
+    constructor(
+        public readonly logType: string,
+        public s: Serializer = console.log.bind(console)
+    ) { }
 
     o(o: LevelLoggerOption) {
         return this.s(JSON.stringify(o));
     }
 
-    msg(msg: string) { }
+    msg(msg: string) { 
+        this.o({ msg })
+    }
 
-    msg_trace(msg: string, stack: string) { }
+    msg_trace(msg: string, stack: string) { 
+        this.o({ msg, stack })
+    }
 
-    msg_status(msg: string, status: { [index: string]: any }) { }
+    msg_status(msg: string, status: { [index: string]: any }) { 
+        this.o({ msg, status })
+    }
 
     msg_status_trace(
         msg: string,
         status: { [index: string]: any },
         stack: string
-    ) { }
+    ) { 
+        this.o({ msg, status, stack })
+    }
 
     trace(stack: string) {
-        this.msg_trace(`$(arguments.callee.name)()`, stack);
+        // this.msg_status_trace(`${arguments.callee.name}()`, {
+        //     caller: this.trace.caller,
+        //     name: arguments.callee.name
+        // }, stack);
+        this.msg_trace("invoked", stack)
     }
 }
 
@@ -65,19 +82,19 @@ export class HeartbeatLogger {
 
 export class Logger {
     // Very detailed infomation
-    public debug = new LevelLogger();
-    public info = new LevelLogger();
+    public debug = new LevelLogger("debug");
+    public info = new LevelLogger("info");
 
     // Warning
     // Some unoccasional situation, not important
-    public warn = new LevelLogger();
+    public warn = new LevelLogger("warn");
 
     // Unexepected situation, handled or not
     // TODO: Issue established, explantion or solution MUST GIVEN
-    public error = new LevelLogger();
+    public error = new LevelLogger("error");
 
     // Error that resulted in exit
-    public fatal = new LevelLogger();
+    public fatal = new LevelLogger("fatal");
 }
 
 function main() {
@@ -91,4 +108,8 @@ function main() {
         status: "on"
     });
 
+    llo.debug.trace(new Error("Here").stack || "Here")
+
 }
+
+main()
