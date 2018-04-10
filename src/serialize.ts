@@ -8,7 +8,7 @@ export abstract class SERIALIZER_TYPE {
     public abstract beat(hid: number): void
 
     // Status
-    public abstract defineStatus(sid: number, Schema: { [index: string]: string }): void
+    public abstract defineStatus(sid: number, data: { [index: string]: any }): void
     public abstract rec(sid: number, status: { [index: string]: any }): void
     
 }
@@ -35,19 +35,19 @@ export class DefaultSerializer extends SERIALIZER_TYPE {
     }
 
     defineHeart(hid: number, data: { [index: string]: any }) {
-        this.write(`H${hid}${JSON.stringify(data)}`)
+        this.write(`H${hid} ${JSON.stringify(data)}`)
     }
 
     beat(hid: number) {
-        this.write(`B${hid}`)
+        this.write(`B${hid} ${Date.now()}`)
     }
 
-    defineStatus(sid: number, Schema: { [index: string]: string }){
-        this.write(`D${sid}` + JSON.stringify(Schema))
+    defineStatus(sid: number, data: { [index: string]: any }){
+        this.write(`D${sid} ${JSON.stringify(data)}`)
     }
 
     rec(sid: number, status: { [index: string]: any }) {
-        this.write(`S${sid}` + JSON.stringify(status))
+        this.write(`S${sid} ${Date.now()} ${JSON.stringify(status)}`)
     }
 
 }

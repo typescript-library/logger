@@ -8,7 +8,7 @@ export class StatusLogger {
 
     constructor(
         public s: ser.SERIALIZER_TYPE,
-        public schema: { [index: string]: string }
+        public data: { [index: string]: any }
     ) {
         this.sid = StatusLogger.SID ++
         this.s.defineStatus(this.sid, schema)
