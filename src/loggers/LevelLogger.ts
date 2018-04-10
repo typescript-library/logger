@@ -1,5 +1,5 @@
 import * as t from "../types"
-import * as ser from "../Serializer"
+import * as ser from "../serialize"
 
 export class LevelLogger {
     constructor(

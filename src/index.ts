@@ -4,7 +4,7 @@ import { LevelLogger } from "./loggers/LevelLogger"
 import { HeartbeatLogger } from "./loggers/HeartbeatLogger"
 import { StatusLogger } from "./loggers/StatusLogger"
 
-import { SERIALIZER_TYPE, DefaultSerializer } from "./Serializer"
+import { SERIALIZER_TYPE, DefaultSerializer } from "./serialize"
 export { SERIALIZER_TYPE, DefaultSerializer }
 
 export class Logger {
