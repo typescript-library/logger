@@ -11,7 +11,7 @@ export class StatusLogger {
         public data: { [index: string]: any }
     ) {
         this.sid = StatusLogger.SID ++
-        this.s.defineStatus(this.sid, schema)
+        this.s.defineStatus(this.sid, data)
     }
 
     rec(status: { [index: string]: any }) {
