@@ -17,7 +17,6 @@ export class Logger {
     public debug = new LevelLogger(t.LevelType.DEUBG, this.s);
     public info = new LevelLogger(t.LevelType.INFO, this.s);
 
-    
 
     // Warning
     // Some unoccasional situation, not important
