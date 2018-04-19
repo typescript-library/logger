@@ -25,6 +25,5 @@
     "typescript": "^2.8.1",
     "typescript-formatter": "^7.1.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
