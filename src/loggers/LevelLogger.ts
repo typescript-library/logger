@@ -1,10 +1,10 @@
 import * as t from "../types"
-import { Serializer } from "../serialize/Serializer"
+import * as Serializer from "../serialize/Serializer"
 
 export class LevelLogger {
     constructor(
         public readonly logType: t.LevelType,
-        public s = new Serializer()
+        public s: Serializer.Type = new Serializer.Major()
     ) { }
 
     o(o: t.LevelLoggerOption) {

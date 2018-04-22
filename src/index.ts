@@ -4,12 +4,12 @@ import { LevelLogger } from "./loggers/LevelLogger"
 import { HeartbeatLogger } from "./loggers/HeartbeatLogger"
 import { StatusLogger } from "./loggers/StatusLogger"
 
-import { Serializer } from "./serialize/Serializer"
+import * as Serializer from "./serialize/Serializer"
 export { Serializer }
 
 export class Logger {
 
-    constructor(public readonly s = new Serializer()){
+    constructor(public readonly s: Serializer.Type = new Serializer.Major()){
         
     }
 

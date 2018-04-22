@@ -1,12 +1,23 @@
 import { Logger } from "./index"
 
-import { Serializer } from "./serialize/Serializer"
+import * as Serializer from "./serialize/Serializer"
 import { sleep } from "./utils";
 
 import * as Stringify from "./serialize/Stringify"
+import { Output } from "./serialize/Output";
 
 async function main() {
-    const llo = new Logger(new Serializer(Stringify.createChalkStringify()));
+    const llo = new Logger(
+        new Serializer.Combination([
+            new Serializer.Major(
+                Stringify.createChalkStringify(),
+                Output.combine(
+                    Output.CONSOLE,
+                    Output.file("/tmp/a.txt")
+                )
+            )
+        ])
+    );
     llo.debug.o({
         msg: "Program ready"
     });
