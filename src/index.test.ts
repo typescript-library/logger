@@ -1,13 +1,15 @@
 import { Logger } from "./index"
 
 import * as s from "./serialize"
+import { sleep } from "./utils";
 
-function main() {
+async function main() {
     const llo = new Logger(new s.ChalkSerializer());
     llo.debug.o({
         msg: "Program ready"
     });
 
+    await sleep(1218)
     llo.debug.msg("123");
     llo.debug.msg_data("123", {
         status: "on",

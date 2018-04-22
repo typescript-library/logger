@@ -72,6 +72,8 @@ export function convert(data: { [index: string]: any }, ret: Array<string>, pref
     }
 }
 
+import * as u from "./utils"
+
 export class ChalkSerializer extends DefaultSerializer {
 
     static SEP = 9
@@ -93,8 +95,9 @@ export class ChalkSerializer extends DefaultSerializer {
 
         const diff_time_str = (
             ChalkSerializer.LEADING_CHARS + 
-            (now - this.history) 
+            u.formatDiffString((now - this.history))
         ).slice(-ChalkSerializer.SEP)
+
         
         const l_difftime = c.redBright(c.bgWhite(diff_time_str))
         const l_time = c.bgWhite(c.black(new Date(now).toISOString() ) )
