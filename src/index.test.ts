@@ -1,10 +1,10 @@
 import { Logger } from "./index"
 
-import * as s from "./serialize"
+import { Chalk } from "./serialize/Chalk"
 import { sleep } from "./utils";
 
 async function main() {
-    const llo = new Logger(new s.ChalkSerializer());
+    const llo = new Logger(new Chalk());
     llo.debug.o({
         msg: "Program ready"
     });

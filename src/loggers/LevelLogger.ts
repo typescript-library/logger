@@ -1,10 +1,10 @@
 import * as t from "../types"
-import * as ser from "../serialize"
+import { Default, SERIALIZER_TYPE } from "../serialize/Default"
 
 export class LevelLogger {
     constructor(
         public readonly logType: t.LevelType,
-        public s: ser.SERIALIZER_TYPE = new ser.DefaultSerializer()
+        public s: SERIALIZER_TYPE = new Default()
     ) { }
 
     o(o: t.LevelLoggerOption) {

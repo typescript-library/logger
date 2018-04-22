@@ -1,5 +1,5 @@
 import * as t from "../types"
-import * as ser from "../serialize"
+import { SERIALIZER_TYPE } from "../serialize/Default"
 
 export class StatusLogger {
 
@@ -7,7 +7,7 @@ export class StatusLogger {
     public readonly sid: number
 
     constructor(
-        public s: ser.SERIALIZER_TYPE,
+        public s: SERIALIZER_TYPE,
         public data: { [index: string]: any }
     ) {
         this.sid = StatusLogger.SID ++
