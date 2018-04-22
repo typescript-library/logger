@@ -26,5 +26,6 @@
     "typescript-formatter": "^7.1.0"
   },
   "dependencies": {
+    "chalk": "^2.4.0"
   }
 }
