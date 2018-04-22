@@ -29,13 +29,15 @@ export function sleep(millis: number){
     return new Promise((res, rej) => setTimeout(res, millis))
 }
 
-export function test(){
-    console.log(formatDiffString(123423213133,12))
-
-    console.log(formatDiffString(1001))
-
-    console.log(formatDiffString(60001))
+// { a: { b:1, c:2 }}
+// => [a.b]=1 [a.c]=2
+export function convert(data: { [index: string]: any }, ret: Array<string>, prefix = ""){
+    for (const i in data) {
+        if (typeof(data[i]) !== "object"){
+            ret.push(`[${prefix+i}]=${data[i]}`)
+        } else {
+            convert(data[i], ret, prefix+i+".")
+        }
+    }
 }
-
-test()
 

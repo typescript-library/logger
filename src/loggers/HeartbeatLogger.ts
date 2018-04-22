@@ -1,5 +1,5 @@
 import * as t from "../types"
-import { SERIALIZER_TYPE, Default } from "../serialize/Default"
+import { Serializer } from "../serialize/Serializer"
 
 export class HeartbeatLogger {
 
@@ -7,7 +7,7 @@ export class HeartbeatLogger {
     public readonly hid: number
 
     constructor(
-        public s: SERIALIZER_TYPE = new Default(),
+        public s = new Serializer(),
         public msg: string,
         public data: { [index: string]: any }
     ) {

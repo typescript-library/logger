@@ -1,10 +1,12 @@
 import { Logger } from "./index"
 
-import { Chalk } from "./serialize/Chalk"
+import { Serializer } from "./serialize/Serializer"
 import { sleep } from "./utils";
 
+import * as Stringify from "./serialize/Stringify"
+
 async function main() {
-    const llo = new Logger(new Chalk());
+    const llo = new Logger(new Serializer(Stringify.createChalkStringify()));
     llo.debug.o({
         msg: "Program ready"
     });

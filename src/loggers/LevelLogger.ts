@@ -1,14 +1,20 @@
 import * as t from "../types"
-import { Default, SERIALIZER_TYPE } from "../serialize/Default"
+import { Serializer } from "../serialize/Serializer"
 
 export class LevelLogger {
     constructor(
         public readonly logType: t.LevelType,
-        public s: SERIALIZER_TYPE = new Default()
+        public s = new Serializer()
     ) { }
 
     o(o: t.LevelLoggerOption) {
-        return this.s.log( this.logType, o );
+        return this.s.log({
+            T: Date.now(),
+            L: this.logType,
+            M: o.msg,
+            D: o.data,
+            S: o.stack
+         });
     }
 
     msg(msg: string) { 

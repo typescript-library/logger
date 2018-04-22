@@ -4,12 +4,12 @@ import { LevelLogger } from "./loggers/LevelLogger"
 import { HeartbeatLogger } from "./loggers/HeartbeatLogger"
 import { StatusLogger } from "./loggers/StatusLogger"
 
-import { SERIALIZER_TYPE, Default as DefaultSerializer } from "./serialize/Default"
-export { SERIALIZER_TYPE, DefaultSerializer }
+import { Serializer } from "./serialize/Serializer"
+export { Serializer }
 
 export class Logger {
 
-    constructor(public readonly s: SERIALIZER_TYPE = new DefaultSerializer()){
+    constructor(public readonly s = new Serializer()){
         
     }
 
