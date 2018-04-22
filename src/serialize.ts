@@ -56,10 +56,10 @@ import { default as c } from "chalk"
 
 const fmap = {
     0: c.green,
-    1: c.blue,
+    1: c.cyan,
     2: c.yellow,
-    3: c.red,
-    4: c.magenta
+    3: (msg: string) => c.bold(c.magentaBright(msg)),
+    4: (msg: string) => c.bold(c.redBright(msg))
 }
 
 export function convert(data: { [index: string]: any }, ret: Array<string>, prefix = ""){
@@ -99,11 +99,10 @@ export class ChalkSerializer extends DefaultSerializer {
         ).slice(-ChalkSerializer.SEP)
 
         
-        const l_difftime = c.redBright(c.bgWhite(diff_time_str))
-        const l_time = c.bgWhite(c.black(new Date(now).toISOString() ) )
+        const l_difftime = c.blue(diff_time_str)
+        const l_time = (c.grey(new Date(now).toISOString() ) )
         const l_msg = general_text_fun(o.msg || "")
         let msg = `${l_difftime} ${l_time} ${l_msg}`
-        
 
         if (o.data){
             const ret: Array<string> = []

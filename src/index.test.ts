@@ -19,8 +19,15 @@ async function main() {
         }
     });
 
+    llo.info.msg_data("12321", {
+        status: "off",
+        work: {
+            a: 3,
+            b: 4
+        }
+    })
     llo.warn.trace(new Error("Here").stack || "Here")
-    llo.fatal.msg_data("Wrong", {
+    llo.fatal.msg_data("Fatal", {
         status: "off",
         work: {
             a: 3,
@@ -28,7 +35,7 @@ async function main() {
         }
     })
 
-    llo.error.msg_data("Wrong", {
+    llo.error.msg_data("Error", {
         status: "off",
         work: {
             a: 3,
