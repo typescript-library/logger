@@ -20,7 +20,6 @@ export interface Type {
     defineStatus(sid: number, data: { [index: string]: any }): void
 
     rec(sid: number, status: { [index: string]: any }): void
-
 }
 
 export class Major implements Type{
@@ -51,6 +50,10 @@ export class Major implements Type{
         this.output(`S${sid} ${Date.now()} ${JSON.stringify(status)}`)
     }
 
+}
+
+export function combine(...s: Array<Type>){
+    return new Combination(s)
 }
 
 export class Combination implements Type {

@@ -9,7 +9,7 @@ import { Output } from "./serialize/Output";
 async function main() {
     const llo = new Logger(
         "MainLogger",
-        new Serializer.Combination([
+        Serializer.combine(
             new Serializer.Major(
                 Stringify.createChalkStringify(),
                 Output.combine(
@@ -17,7 +17,7 @@ async function main() {
                     Output.file("/tmp/a.txt")
                 )
             )
-        ])
+        )
     );
     llo.debug.o({
         msg: "Program ready"
