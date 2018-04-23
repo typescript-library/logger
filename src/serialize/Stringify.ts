@@ -11,7 +11,7 @@ const DEFAULT_CHALK_LEVEL_MAP: { [index: number]: (msg: string) => string } = {
     4: (msg: string) => c.bold(c.redBright(msg))
 }
 
-export function createChalkStringify(
+export function createChalk(
     fmap = DEFAULT_CHALK_LEVEL_MAP,
     SEP = 9,
     LEADING_SPACE = " ".repeat(SEP + 1),

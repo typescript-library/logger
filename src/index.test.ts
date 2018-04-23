@@ -11,7 +11,7 @@ async function main() {
         "MainLogger",
         Serializer.combine(
             new Serializer.Major(
-                Stringify.createChalkStringify(),
+                Stringify.createChalk(),
                 Output.combine(
                     Output.CONSOLE,
                     Output.file("/tmp/a.txt")
