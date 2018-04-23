@@ -26,7 +26,7 @@ export interface Type {
 export class Major implements Type{
     
     constructor(
-        public levelLogStringify = JSON.stringify,
+        public levelLogStringify: (msg: any) => string = JSON.stringify,
         public output = Output.CONSOLE,
     ){
     }

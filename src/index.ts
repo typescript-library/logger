@@ -9,7 +9,9 @@ export { Serializer }
 
 export class Logger {
 
-    constructor(public readonly s: Serializer.Type = new Serializer.Major()){
+    constructor(
+        public name: string,
+        public readonly s: Serializer.Type = new Serializer.Major()){
         
     }
 

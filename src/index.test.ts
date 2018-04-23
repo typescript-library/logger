@@ -8,6 +8,7 @@ import { Output } from "./serialize/Output";
 
 async function main() {
     const llo = new Logger(
+        "MainLogger",
         new Serializer.Combination([
             new Serializer.Major(
                 Stringify.createChalkStringify(),
