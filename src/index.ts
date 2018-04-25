@@ -7,6 +7,12 @@ import { StatusLogger } from "./loggers/StatusLogger"
 import * as Serializer from "./serialize/Serializer"
 export { Serializer }
 
+import * as Stringify from "./serialize/Stringify"
+export { Stringify }
+
+import { Output } from "./serialize/Output"
+export { Output }
+
 export class Logger {
 
     constructor(

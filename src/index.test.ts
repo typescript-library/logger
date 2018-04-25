@@ -1,13 +1,8 @@
-import { Logger } from "./index"
-
-import * as Serializer from "./serialize/Serializer"
 import { sleep } from "./utils";
-
-import * as Stringify from "./serialize/Stringify"
-import { Output } from "./serialize/Output";
+import { Logger, Output, Stringify, Serializer } from "./index";
 
 async function main() {
-    const llo = new Logger(
+    const llo = Logger.createRoot(
         "MainLogger",
         Serializer.combine(
             new Serializer.Major(
