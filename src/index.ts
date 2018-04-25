@@ -10,9 +10,17 @@ export { Serializer }
 export class Logger {
 
     constructor(
-        public name: string,
+        public nameList: Array<string>,
         public readonly s: Serializer.Type = new Serializer.Major()){
         
+    }
+
+    static createRoot(name: string, s: Serializer.Type = new Serializer.Major()){
+        return new Logger([name], s)
+    }
+
+    createSub(name: string){
+        return new Logger([...this.nameList, name], this.s)
     }
 
     // Very detailed infomation
