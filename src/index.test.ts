@@ -35,8 +35,11 @@ async function main() {
             b: 4
         }
     })
-    llo.warn.trace(new Error("Here").stack || "Here")
-    llo.fatal.msg_data("Fatal", {
+
+    const slog = llo.createSub("sublogger")
+
+    slog.warn.trace(new Error("Here").stack || "Here")
+    slog.fatal.msg_data("Fatal", {
         status: "off",
         work: {
             a: 3,

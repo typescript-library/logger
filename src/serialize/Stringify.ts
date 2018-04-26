@@ -33,8 +33,9 @@ export function createChalk(
 
         const l_difftime = c.blue(diff_time_str)
         const l_time = (c.grey(new Date(data.T).toISOString() ) )
+        const l_namelist = data.N
         const l_msg = general_text_fun(data.M || "")
-        let msg = `${l_difftime} ${l_time} ${l_msg}`
+        let msg = `${l_difftime} ${l_time} [${l_namelist}] ${l_msg}`
 
         if (data.D){
             const ret: Array<string> = []

@@ -8,6 +8,7 @@ export type LOG_TYPE = "debug" | "info" | "warn" | "error" | "fatal"
 
 export namespace Persistant{
     export type LevelLog = {
+        N: Array<string>,
         T: number,  // Timestamp
         L: number,  // LogLevl
         M?: string,  // Message

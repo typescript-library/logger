@@ -30,20 +30,20 @@ export class Logger {
     }
 
     // Very detailed infomation
-    public debug = new LevelLogger(t.LevelType.DEUBG, this.s);
-    public info = new LevelLogger(t.LevelType.INFO, this.s);
+    public debug = new LevelLogger(t.LevelType.DEUBG, this.s, this.nameList);
+    public info = new LevelLogger(t.LevelType.INFO, this.s, this.nameList);
 
 
     // Warning
     // Some unoccasional situation, not important
-    public warn = new LevelLogger(t.LevelType.WARN, this.s);
+    public warn = new LevelLogger(t.LevelType.WARN, this.s, this.nameList);
 
     // Unexepected situation, handled or not
     // TODO: Issue established, explantion or solution MUST GIVEN
-    public error = new LevelLogger(t.LevelType.ERROR, this.s);
+    public error = new LevelLogger(t.LevelType.ERROR, this.s, this.nameList);
 
     // Error that resulted in exit
-    public fatal = new LevelLogger(t.LevelType.FATAL, this.s);
+    public fatal = new LevelLogger(t.LevelType.FATAL, this.s, this.nameList);
 
     defineHeatbeatLogger(
         msg: string,

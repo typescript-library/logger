@@ -4,11 +4,13 @@ import * as Serializer from "../serialize/Serializer"
 export class LevelLogger {
     constructor(
         public readonly logType: t.LevelType,
-        public s: Serializer.Type = new Serializer.Major()
+        public s: Serializer.Type = new Serializer.Major(),
+        public readonly nameList: Array<string>
     ) { }
 
     o(o: t.LevelLoggerOption) {
         return this.s.log({
+            N: this.nameList,
             T: Date.now(),
             L: this.logType,
             M: o.msg,
