@@ -15,7 +15,11 @@ export class LevelLogger {
             L: this.logType,
             M: o.msg,
             D: o.data,
-            S: o.stack
+            E: o.error && {
+                msg: o.error.message,
+                name: o.error.name,
+                stack: o.error.stack
+            }
          });
     }
 
@@ -23,8 +27,8 @@ export class LevelLogger {
         this.o({ msg })
     }
 
-    msg_trace(msg: string, stack: string) { 
-        this.o({ msg, stack })
+    msg_trace(msg: string, error: Error) { 
+        this.o({ msg, error })
     }
 
     msg_data(msg: string, data: { [index: string]: any }) { 
@@ -34,16 +38,16 @@ export class LevelLogger {
     msg_data_trace(
         msg: string,
         data: { [index: string]: any },
-        stack: string
+        error: Error
     ) { 
-        this.o({ msg, data, stack })
+        this.o({ msg, data, error })
     }
 
-    trace(stack: string) {
+    trace(error: Error) {
         // this.msg_status_trace(`${arguments.callee.name}()`, {
         //     caller: this.trace.caller,
         //     name: arguments.callee.name
-        // }, stack);
-        this.msg_trace("invoked", stack)
+        // }, error);
+        this.msg_trace("invoked", error)
     }
 }

@@ -46,7 +46,7 @@ async function main() {
 
     const slog = llo.createSub("sublogger")
 
-    slog.warn.trace(new Error("Here").stack || "Here")
+    slog.warn.trace(new Error("Here"))
     slog.fatal.msg_data("Fatal", {
         status: "off",
         work: {

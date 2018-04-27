@@ -41,3 +41,11 @@ export function convert(data: { [index: string]: any }, ret: Array<string>, pref
     }
 }
 
+
+export function stringifyError(e: Error){
+    return {
+        msg: e.message,
+        name: e.name,
+        stack: e.stack
+    }
+}

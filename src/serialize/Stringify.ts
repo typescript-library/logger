@@ -43,6 +43,11 @@ export function createChalk(
             const l_data = general_text_fun(ret.join(" "))
             msg += `\n${l_data}`
         }
-        return msg.replace("\n", `\n${LEADING_SPACE}`)
+
+        if (data.E) {
+            // msg += `\n[${data.E.name}] ${data.E.msg}\n${data.E.stack && c.dim(data.E.stack)}`
+            msg += `\n${data.E.stack && c.dim(data.E.stack)}`
+        }
+        return msg.replace(/\n/g, `\n${LEADING_SPACE}`)
     }
 }

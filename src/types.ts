@@ -1,7 +1,7 @@
 export type LevelLoggerOption = {
-    stack?: string;
-    msg?: string;
-    data?: { [index: string]: any };
+    error?: Error
+    msg?: string
+    data?: { [index: string]: any }
 };
 
 export type LOG_TYPE = "debug" | "info" | "warn" | "error" | "fatal" 
@@ -13,7 +13,11 @@ export namespace Persistant{
         L: number,  // LogLevl
         M?: string,  // Message
         D?: { [index: string]: any },    //Data
-        S?: string   // Stack
+        E?: {
+            msg?: string,
+            name?: string,
+            stack?: string
+        }   // Stack
     }
 
     export type HeatLog = BeatLog & {
