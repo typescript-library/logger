@@ -62,8 +62,8 @@
 # 语言版本
 
 Typescript - 兼容Javascript
-Java - 兼容JVM上的所有语言，Kotlin ...
 Python
+Java - 兼容JVM上的所有语言，Kotlin ...
 Lua
 Go
 转接器
