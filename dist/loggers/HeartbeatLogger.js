@@ -7,9 +7,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ser = __importStar(require("../serialize"));
+const Serializer = __importStar(require("../serialize/Serializer"));
 class HeartbeatLogger {
-    constructor(s = new ser.DefaultSerializer(), msg, data) {
+    constructor(s = new Serializer.Major(), msg, data) {
         this.s = s;
         this.msg = msg;
         this.data = data;
