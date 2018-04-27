@@ -5,7 +5,7 @@ import * as g from "./global"
 
 async function main() {
 
-    g.injectLogger(
+    g.Instances.RootLogger = 
         Logger.createRoot(
             "MainLogger-123",
             Serializer.combine(
@@ -18,9 +18,9 @@ async function main() {
                 )
             )
         )
-    )
     
-    const llo =  g.RootLogger
+    
+    const llo =  g.Instances.RootLogger
     
     llo.debug.o({
         msg: "Program ready"
