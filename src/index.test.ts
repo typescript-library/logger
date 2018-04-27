@@ -1,19 +1,27 @@
 import { sleep } from "./utils";
 import { Logger, Output, Stringify, Serializer } from "./index";
 
+import * as g from "./global"
+
 async function main() {
-    const llo = Logger.createRoot(
-        "MainLogger",
-        Serializer.combine(
-            new Serializer.Major(
-                Stringify.createChalk(),
-                Output.combine(
-                    Output.CONSOLE,
-                    Output.file("/tmp/a.txt")
+
+    g.injectLogger(
+        Logger.createRoot(
+            "MainLogger-123",
+            Serializer.combine(
+                new Serializer.Major(
+                    Stringify.createChalk(),
+                    Output.combine(
+                        Output.CONSOLE,
+                        Output.file("/tmp/a.txt")
+                    )
                 )
             )
         )
-    );
+    )
+    
+    const llo =  g.RootLogger
+    
     llo.debug.o({
         msg: "Program ready"
     });

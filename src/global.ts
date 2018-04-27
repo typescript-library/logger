@@ -1,6 +1,6 @@
 import * as index from "./index"
 
-export const RootLogger = index.Logger.createRoot(
+export var RootLogger = index.Logger.createRoot(
     "Logger",
     new index.Serializer.Major(
         index.Stringify.createChalk(),
@@ -11,4 +11,8 @@ export const RootLogger = index.Logger.createRoot(
     )
 )
 
+
+export function injectLogger(logger: index.Logger){
+    RootLogger = logger
+}
 
