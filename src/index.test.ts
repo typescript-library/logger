@@ -13,8 +13,13 @@ async function main() {
                     Stringify.createChalk(),
                     Output.combine(
                         Output.CONSOLE,
-                        Output.file("/tmp/a.txt")
+                        Output.file("./a.log")
                     )
+                ),
+
+                new Serializer.Major(
+                    JSON.stringify,
+                    Output.file("./a.json.log")
                 )
             )
         )

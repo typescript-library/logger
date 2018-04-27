@@ -1,6 +1,7 @@
 import * as index from "./index"
 
 export class Instances {
+
     public static RootLogger = index.Logger.createRoot(
         "Logger",
         new index.Serializer.Major(
@@ -11,5 +12,6 @@ export class Instances {
             )
         )
     )
+
 }
 
