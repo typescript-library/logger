@@ -58,3 +58,12 @@
 3. 可以给之后的log auditor提供日志关系梳理的思路
 
 我感觉，我还是要先做log.vis和log.audit，再设计日志框架为好
+
+# 语言版本
+
+Typescript - 兼容Javascript
+Java - 兼容JVM上的所有语言，Kotlin ...
+Python
+Lua
+Go
+转接器
