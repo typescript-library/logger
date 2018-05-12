@@ -21,7 +21,10 @@ export class Logger {
         
     }
 
-    static createRoot(name: string, s: Serializer.Type = new Serializer.Major()){
+    static createRoot(name: string, s: Serializer.Type | Array<Serializer.Type> = new Serializer.Major()){
+        if (Array.isArray(s)){
+            s = Serializer.combine(...s)
+        }
         return new Logger([name], s)
     }
 

@@ -24,10 +24,16 @@ export interface Type {
 
 export class Major implements Type{
     
+    public output: Output.Type
     constructor(
         public levelLogStringify: (msg: any) => string = JSON.stringify,
-        public output = Output.CONSOLE,
+        output: Output.Type | Output.Type[] = Output.CONSOLE,
     ){
+        if (Array.isArray(output)){
+            this.output = Output.combine(...output)
+        } else {
+            this.output = output
+        }
     }
 
     public log(data: t.Persistant.LevelLog): void {

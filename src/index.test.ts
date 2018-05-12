@@ -8,22 +8,21 @@ async function main() {
     g.Instances.RootLogger = 
         Logger.createRoot(
             "MainLogger-123",
-            Serializer.combine(
+            [
                 new Serializer.Major(
                     Stringify.createChalk(),
-                    Output.combine(
+                    [
                         Output.CONSOLE,
                         Output.file("./a.log")
-                    )
+                    ]
                 ),
 
                 new Serializer.Major(
                     JSON.stringify,
                     Output.file("./a.json.log")
                 )
-            )
+            ]
         )
-    
     
     const llo =  g.Instances.RootLogger
     
