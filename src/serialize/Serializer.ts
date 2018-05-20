@@ -26,7 +26,7 @@ export class Major implements Type{
     
     public output: Output.Type
     constructor(
-        public levelLogStringify: (msg: any) => string = JSON.stringify,
+        public levelLogStringify: (msg: t.Persistant.LevelLog) => string = JSON.stringify,
         output: Output.Type | Output.Type[] = Output.CONSOLE,
     ){
         if (Array.isArray(output)){
