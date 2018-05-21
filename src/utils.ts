@@ -2,11 +2,13 @@ export function convertToUnits(millis: number){
     let rest = millis
     const ms = rest % 1000
     rest = Math.floor(rest/1000)
+    const sec = rest % 60
+    rest = Math.floor(rest/1000)
     const minute = rest % 60
     rest = Math.floor(rest/60)
     const hour = rest % 24
     const day = Math.floor(rest/24)
-    return [day, "d", hour, "h", minute, "m", ms, ""]
+    return [day, "d", hour, "h", minute, "m", sec, "s", ms, ""]
 }
 
 export function formatDiffString(millis: number, max_string = 9){
