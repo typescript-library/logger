@@ -13,7 +13,7 @@ async function main() {
                 Output.file("./a.log")
             ),
 
-            Serializer.toChalk(
+            Serializer.toJSON(
                 Output.file("./a.json.log")
             )
         )
