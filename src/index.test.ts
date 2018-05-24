@@ -9,16 +9,14 @@ async function main() {
         Logger.createRoot(
             "MainLogger-123",
             [
-                new Serializer.Major(
-                    Stringify.createChalk(),
+                Serializer.stringifyToChalk(
                     [
                         Output.CONSOLE,
                         Output.file("./a.log")
                     ]
                 ),
 
-                new Serializer.Major(
-                    JSON.stringify,
+                Serializer.stringifyToChalk(
                     Output.file("./a.json.log")
                 )
             ]

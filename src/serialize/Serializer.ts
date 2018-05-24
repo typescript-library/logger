@@ -3,6 +3,8 @@ import * as t from "../types"
 // import * as time from "time"
 
 import { Output } from "./Output"
+import chalk from "chalk";
+import { Stringify } from "..";
 
 // export type SO = {
 //     "stringify": (msg: string) => void
@@ -56,6 +58,14 @@ export class Major implements Type{
         this.output(`S${sid} ${Date.now()} ${JSON.stringify(status)}`)
     }
 
+}
+
+export function stringifyToChalk(output: Output.Type | Output.Type[] = Output.CONSOLE){
+    return new Major(Stringify.createChalk(), output)
+}
+
+export function stringifyToJSON(output: Output.Type | Output.Type[] = Output.CONSOLE){
+    return new Major(JSON.stringify, output)
 }
 
 export function combine(...s: Array<Type>){
