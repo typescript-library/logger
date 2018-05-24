@@ -21,11 +21,12 @@ export class Logger {
         
     }
 
-    static createRoot(name: string, s: Serializer.Type | Array<Serializer.Type> = new Serializer.Major()){
-        if (Array.isArray(s)){
-            s = Serializer.combine(...s)
-        }
-        return new Logger([name], s)
+    static createRoot(name: string, ... s: Serializer.Type[]){
+        const ss = s.length > 1 ? 
+            Serializer.combine(...s):
+            s.length == 1 ? s[0] : Serializer.stringifyToChalk()
+        
+        return new Logger([name], ss)
     }
 
     createSub(name: string){

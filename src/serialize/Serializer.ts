@@ -29,13 +29,12 @@ export class Major implements Type{
     public output: Output.Type
     constructor(
         public levelLogStringify: (msg: t.Persistant.LevelLog) => string = JSON.stringify,
-        output: Output.Type | Output.Type[] = Output.CONSOLE,
+        ...output: Output.Type[],
     ){
-        if (Array.isArray(output)){
-            this.output = Output.combine(...output)
-        } else {
-            this.output = output
-        }
+        this.output =
+            output.length === 0 ? 
+                Output.CONSOLE:
+                output.length === 1 ? output[0] : Output.combine(...output)
     }
 
     public log(data: t.Persistant.LevelLog): void {
@@ -60,12 +59,12 @@ export class Major implements Type{
 
 }
 
-export function stringifyToChalk(output: Output.Type | Output.Type[] = Output.CONSOLE){
-    return new Major(Stringify.createChalk(), output)
+export function toChalk(...output: Output.Type[]){
+    return new Major(Stringify.createChalk(), ...output)
 }
 
-export function stringifyToJSON(output: Output.Type | Output.Type[] = Output.CONSOLE){
-    return new Major(JSON.stringify, output)
+export function toJSON(...output: Output.Type[]){
+    return new Major(JSON.stringify, ...output)
 }
 
 export function combine(...s: Array<Type>){
