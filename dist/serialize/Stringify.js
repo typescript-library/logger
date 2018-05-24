@@ -12,12 +12,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = __importDefault(require("chalk"));
 const u = __importStar(require("../utils"));
+const c = new chalk_1.default.constructor({ level: 1 });
 const DEFAULT_CHALK_LEVEL_MAP = {
-    0: chalk_1.default.green,
-    1: chalk_1.default.cyan,
-    2: chalk_1.default.yellow,
-    3: (msg) => chalk_1.default.bold(chalk_1.default.magentaBright(msg)),
-    4: (msg) => chalk_1.default.bold(chalk_1.default.redBright(msg))
+    0: c.green,
+    1: c.cyan,
+    2: c.yellow,
+    3: (msg) => c.bold(c.magentaBright(msg)),
+    4: (msg) => c.bold(c.redBright(msg))
 };
 function createChalk(fmap = DEFAULT_CHALK_LEVEL_MAP, SEP = 9, LEADING_SPACE = " ".repeat(SEP + 1), LEADING_CHARS = "_".repeat(SEP)) {
     let history = Date.now();
@@ -27,8 +28,8 @@ function createChalk(fmap = DEFAULT_CHALK_LEVEL_MAP, SEP = 9, LEADING_SPACE = " 
         const general_text_fun = fmap[data.L];
         const diff_time_str = (LEADING_CHARS +
             u.formatDiffString((diff))).slice(-SEP);
-        const l_difftime = chalk_1.default.blue(diff_time_str);
-        const l_time = (chalk_1.default.grey(new Date(data.T).toISOString()));
+        const l_difftime = c.blue(diff_time_str);
+        const l_time = (c.grey(new Date(data.T).toISOString()));
         const l_namelist = data.N;
         const l_msg = general_text_fun(data.M || "");
         let msg = `${l_difftime} ${l_time} [${l_namelist}] ${l_msg}`;
@@ -40,7 +41,7 @@ function createChalk(fmap = DEFAULT_CHALK_LEVEL_MAP, SEP = 9, LEADING_SPACE = " 
         }
         if (data.E) {
             // msg += `\n[${data.E.name}] ${data.E.msg}\n${data.E.stack && c.dim(data.E.stack)}`
-            msg += `\n${data.E.stack && chalk_1.default.dim(data.E.stack)}`;
+            msg += `\n${data.E.stack && c.dim(data.E.stack)}`;
         }
         return msg.replace(/\n/g, `\n${LEADING_SPACE}`);
     };

@@ -21,7 +21,7 @@ const g = __importStar(require("./global"));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         g.Instances.RootLogger =
-            index_1.Logger.createRoot("MainLogger-123", index_1.Serializer.toChalk(index_1.Output.CONSOLE, index_1.Output.file("./a.log")), index_1.Serializer.toChalk(index_1.Output.file("./a.json.log")));
+            index_1.Logger.createRoot("MainLogger-123", index_1.Serializer.toChalk(index_1.Output.CONSOLE, index_1.Output.file("./a.log")), index_1.Serializer.toJSON(index_1.Output.file("./a.json.log")));
         const llo = g.Instances.RootLogger;
         llo.debug.o({
             msg: "Program ready"
