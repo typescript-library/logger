@@ -24,7 +24,7 @@ export class Logger {
     static createRoot(name: string, ...s: Serializer.Type[]) {
         const ss = s.length > 1 ?
             Serializer.combine(...s) :
-            s.length == 1 ? s[0] : Serializer.stringifyToChalk()
+            s.length == 1 ? s[0] : Serializer.toChalk()
 
         return new Logger([name], ss)
     }
