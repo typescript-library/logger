@@ -20,18 +20,18 @@ export class LevelLogger {
                 name: o.error.name,
                 stack: o.error.stack
             }
-         });
+        });
     }
 
-    msg(msg: string) { 
+    msg(msg: string) {
         this.o({ msg })
     }
 
-    msg_trace(msg: string, error: Error) { 
+    msg_trace(msg: string, error: Error) {
         this.o({ msg, error })
     }
 
-    msg_data(msg: string, data: { [index: string]: any }) { 
+    msg_data(msg: string, data: { [index: string]: any }) {
         this.o({ msg, data })
     }
 
@@ -39,7 +39,7 @@ export class LevelLogger {
         msg: string,
         data: { [index: string]: any },
         error: Error
-    ) { 
+    ) {
         this.o({ msg, data, error })
     }
 

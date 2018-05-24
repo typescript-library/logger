@@ -5,7 +5,7 @@ import * as g from "./global"
 
 async function main() {
 
-    g.Instances.RootLogger = 
+    g.Instances.RootLogger =
         Logger.createRoot(
             "MainLogger-123",
             Serializer.toChalk(
@@ -17,9 +17,9 @@ async function main() {
                 Output.file("./a.json.log")
             )
         )
-    
-    const llo =  g.Instances.RootLogger
-    
+
+    const llo = g.Instances.RootLogger
+
     llo.debug.o({
         msg: "Program ready"
     });

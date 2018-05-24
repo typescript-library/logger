@@ -17,19 +17,19 @@ export class Logger {
 
     constructor(
         public nameList: Array<string>,
-        public readonly s: Serializer.Type = new Serializer.Major()){
-        
+        public readonly s: Serializer.Type = new Serializer.Major()) {
+
     }
 
-    static createRoot(name: string, ... s: Serializer.Type[]){
-        const ss = s.length > 1 ? 
-            Serializer.combine(...s):
+    static createRoot(name: string, ...s: Serializer.Type[]) {
+        const ss = s.length > 1 ?
+            Serializer.combine(...s) :
             s.length == 1 ? s[0] : Serializer.stringifyToChalk()
-        
+
         return new Logger([name], ss)
     }
 
-    createSub(name: string){
+    createSub(name: string) {
         return new Logger([...this.nameList, name], this.s)
     }
 
@@ -52,11 +52,11 @@ export class Logger {
     defineHeatbeatLogger(
         msg: string,
         data: { [index: string]: any }
-    ){
+    ) {
         return new HeartbeatLogger(this.s, msg, data)
     }
 
-    defineStatusLogger(Schema: { [index: string]: string }){
+    defineStatusLogger(Schema: { [index: string]: string }) {
         return new StatusLogger(this.s, Schema)
     }
 

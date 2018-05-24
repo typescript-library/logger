@@ -6,11 +6,11 @@ export namespace Output {
 
     export const CONSOLE: Type = (msg: string) => console.log(msg)
 
-    export function file(filepath: string): Type{
-        return (msg: string) => fs.appendFile(filepath, msg + "\n", ()=>{})
+    export function file(filepath: string): Type {
+        return (msg: string) => fs.appendFile(filepath, msg + "\n", () => { })
     }
 
-    export function combine(...outputs: Array<Type>): Type{
+    export function combine(...outputs: Array<Type>): Type {
         return (msg: string) => outputs.forEach((e) => e(msg))
     }
 

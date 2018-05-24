@@ -24,16 +24,16 @@ export interface Type {
     rec(sid: number, status: { [index: string]: any }): void
 }
 
-export class Major implements Type{
-    
+export class Major implements Type {
+
     public output: Output.Type
     constructor(
         public levelLogStringify: (msg: t.Persistant.LevelLog) => string = JSON.stringify,
         ...output: Output.Type[],
-    ){
+    ) {
         this.output =
-            output.length === 0 ? 
-                Output.CONSOLE:
+            output.length === 0 ?
+                Output.CONSOLE :
                 output.length === 1 ? output[0] : Output.combine(...output)
     }
 
@@ -49,7 +49,7 @@ export class Major implements Type{
         this.output(`B${hid} ${Date.now()}`)
     }
 
-    defineStatus(sid: number, data: { [index: string]: any }){
+    defineStatus(sid: number, data: { [index: string]: any }) {
         this.output(`D${sid} ${JSON.stringify(data)}`)
     }
 
@@ -59,23 +59,23 @@ export class Major implements Type{
 
 }
 
-export function toChalk(...output: Output.Type[]){
+export function toChalk(...output: Output.Type[]) {
     return new Major(Stringify.createChalk(), ...output)
 }
 
-export function toJSON(...output: Output.Type[]){
+export function toJSON(...output: Output.Type[]) {
     return new Major(JSON.stringify, ...output)
 }
 
-export function combine(...s: Array<Type>){
+export function combine(...s: Array<Type>) {
     return new Combination(s)
 }
 
 export class Combination implements Type {
-    
+
     constructor(
         public s: Array<Type>
-    ){
+    ) {
     }
 
     public log(data: t.Persistant.LevelLog): void {
@@ -90,7 +90,7 @@ export class Combination implements Type {
         this.s.forEach((e) => e.beat(hid))
     }
 
-    defineStatus(sid: number, data: { [index: string]: any }){
+    defineStatus(sid: number, data: { [index: string]: any }) {
         this.s.forEach((e) => e.defineStatus(sid, data))
     }
 

@@ -11,7 +11,7 @@ export class HeartbeatLogger {
         public msg: string,
         public data: { [index: string]: any }
     ) {
-        this.hid = HeartbeatLogger.HID ++
+        this.hid = HeartbeatLogger.HID++
         this.def(msg, data)
     }
 

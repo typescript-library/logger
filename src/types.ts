@@ -4,9 +4,9 @@ export type LevelLoggerOption = {
     data?: { [index: string]: any }
 };
 
-export type LOG_TYPE = "debug" | "info" | "warn" | "error" | "fatal" 
+export type LOG_TYPE = "debug" | "info" | "warn" | "error" | "fatal"
 
-export namespace Persistant{
+export namespace Persistant {
     export type LevelLog = {
         N: Array<string>,
         T: number,  // Timestamp

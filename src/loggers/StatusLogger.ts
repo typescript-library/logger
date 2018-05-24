@@ -10,7 +10,7 @@ export class StatusLogger {
         public s: Serializer.Type = new Serializer.Major(),
         public data: { [index: string]: any }
     ) {
-        this.sid = StatusLogger.SID ++
+        this.sid = StatusLogger.SID++
         this.s.defineStatus(this.sid, data)
     }
 
