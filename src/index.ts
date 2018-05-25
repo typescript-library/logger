@@ -33,9 +33,11 @@ export class Logger {
 
     static createDefault(
         loggerName: string,
-        logfileName: string = Logger.generateDateString(),
+        logfileName: string | undefined = undefined,
         path="."
     ){
+        logfileName = logfileName || Logger.generateDateString()
+
         return Logger.create(
             loggerName,
             Serializer.toChalk(
@@ -48,7 +50,7 @@ export class Logger {
         )
     }
 
-    create(name: string) {
+    createChildLogger(name: string) {
         return new Logger([...this.nameList, name], this.s)
     }
 

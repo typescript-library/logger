@@ -40,10 +40,11 @@ class Logger {
             s.length == 1 ? s[0] : Serializer.toChalk();
         return new Logger([name], ss);
     }
-    static createDefault(loggerName, logfileName = Logger.generateDateString(), path = ".") {
+    static createDefault(loggerName, logfileName = undefined, path = ".") {
+        logfileName = logfileName || Logger.generateDateString();
         return Logger.create(loggerName, Serializer.toChalk(Output_1.Output.CONSOLE, Output_1.Output.file(path_1.join(path, logfileName + ".chalk.log"))), Serializer.toJSON(Output_1.Output.file(path_1.join(logfileName + ".json.log"))));
     }
-    create(name) {
+    createChildLogger(name) {
         return new Logger([...this.nameList, name], this.s);
     }
     defineHeatbeatLogger(msg, data) {

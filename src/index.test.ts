@@ -42,7 +42,7 @@ async function main() {
         }
     })
 
-    const slog = llo.create("sublogger")
+    const slog = llo.createChildLogger("sublogger")
 
     slog.warn.trace(new Error("Here"))
     slog.fatal.msg_data("Fatal", {
