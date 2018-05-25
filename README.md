@@ -5,7 +5,7 @@
 # How to install
 
 ```bash
-npm install https://github.com/lteam18/logger.git#v1 --save
+npm install https://github.com/typescript-library/logger.git#v1 --save
 ```
 
 
