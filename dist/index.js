@@ -17,6 +17,7 @@ const Stringify = __importStar(require("./serialize/Stringify"));
 exports.Stringify = Stringify;
 const Output_1 = require("./serialize/Output");
 exports.Output = Output_1.Output;
+const path_1 = require("path");
 class Logger {
     constructor(nameList, s = new Serializer.Major()) {
         this.nameList = nameList;
@@ -33,13 +34,16 @@ class Logger {
         // Error that resulted in exit
         this.fatal = new LevelLogger_1.LevelLogger(t.LevelType.FATAL, this.s, this.nameList);
     }
-    static createRoot(name, ...s) {
+    static create(name, ...s) {
         const ss = s.length > 1 ?
             Serializer.combine(...s) :
             s.length == 1 ? s[0] : Serializer.toChalk();
         return new Logger([name], ss);
     }
-    createSub(name) {
+    static createDefault(loggerName, logfileName = Logger.generateDateString(), path = ".") {
+        return Logger.create(loggerName, Serializer.toChalk(Output_1.Output.CONSOLE, Output_1.Output.file(path_1.join(path, logfileName + ".chalk.log"))), Serializer.toJSON(Output_1.Output.file(path_1.join(logfileName + ".json.log"))));
+    }
+    create(name) {
         return new Logger([...this.nameList, name], this.s);
     }
     defineHeatbeatLogger(msg, data) {
@@ -47,6 +51,9 @@ class Logger {
     }
     defineStatusLogger(Schema) {
         return new StatusLogger_1.StatusLogger(this.s, Schema);
+    }
+    static generateDateString() {
+        return new Date().toISOString().replace(/:/g, "-");
     }
 }
 exports.Logger = Logger;

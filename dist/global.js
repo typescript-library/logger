@@ -10,5 +10,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const index = __importStar(require("./index"));
 class Instances {
 }
-Instances.RootLogger = index.Logger.createRoot("Logger", index.Serializer.toChalk(index.Output.combine(index.Output.CONSOLE)));
+Instances.RootLogger = index.Logger.create("Logger", index.Serializer.toChalk(index.Output.combine(index.Output.CONSOLE)));
 exports.Instances = Instances;

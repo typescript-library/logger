@@ -2,7 +2,7 @@ import * as index from "./index"
 
 export class Instances {
 
-    public static RootLogger = index.Logger.createRoot(
+    public static RootLogger = index.Logger.create(
         "Logger",
         index.Serializer.toChalk(
             index.Output.combine(

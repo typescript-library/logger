@@ -6,7 +6,7 @@ import * as g from "./global"
 async function main() {
 
     g.Instances.RootLogger =
-        Logger.createRoot(
+        Logger.create(
             "MainLogger-123",
             Serializer.toChalk(
                 Output.CONSOLE,
@@ -42,7 +42,7 @@ async function main() {
         }
     })
 
-    const slog = llo.createSub("sublogger")
+    const slog = llo.create("sublogger")
 
     slog.warn.trace(new Error("Here"))
     slog.fatal.msg_data("Fatal", {

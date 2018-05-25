@@ -13,6 +13,8 @@ export { Stringify }
 import { Output } from "./serialize/Output"
 export { Output }
 
+import { join as pj } from "path"
+
 export class Logger {
 
     constructor(
@@ -21,7 +23,7 @@ export class Logger {
 
     }
 
-    static createRoot(name: string, ...s: Serializer.Type[]) {
+    static create(name: string, ...s: Serializer.Type[]) {
         const ss = s.length > 1 ?
             Serializer.combine(...s) :
             s.length == 1 ? s[0] : Serializer.toChalk()
@@ -29,14 +31,30 @@ export class Logger {
         return new Logger([name], ss)
     }
 
-    createSub(name: string) {
+    static createDefault(
+        loggerName: string,
+        logfileName: string = Logger.generateDateString(),
+        path="."
+    ){
+        return Logger.create(
+            loggerName,
+            Serializer.toChalk(
+                Output.CONSOLE,
+                Output.file(pj(path, logfileName + ".chalk.log"))
+            ),
+            Serializer.toJSON(
+                Output.file(pj(logfileName + ".json.log"))
+            )
+        )
+    }
+
+    create(name: string) {
         return new Logger([...this.nameList, name], this.s)
     }
 
     // Very detailed infomation
     public debug = new LevelLogger(t.LevelType.DEUBG, this.s, this.nameList);
     public info = new LevelLogger(t.LevelType.INFO, this.s, this.nameList);
-
 
     // Warning
     // Some unoccasional situation, not important
@@ -58,6 +76,10 @@ export class Logger {
 
     defineStatusLogger(Schema: { [index: string]: string }) {
         return new StatusLogger(this.s, Schema)
+    }
+
+    static generateDateString(){
+        return new Date().toISOString().replace(/:/g, "-")
     }
 
 }
