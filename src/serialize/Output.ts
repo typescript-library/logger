@@ -11,7 +11,13 @@ export namespace Output {
     }
 
     export function combine(...outputs: Array<Type>): Type {
-        return (msg: string) => outputs.forEach((e) => e(msg))
+        return (msg: string) => outputs.forEach((e) => {
+            try {
+                e(msg)
+            } catch (err) {
+                console.error(err)
+            }
+        })
     }
 
 }

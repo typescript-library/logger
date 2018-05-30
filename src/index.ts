@@ -34,15 +34,15 @@ export class Logger {
     static createDefault(
         loggerName: string,
         logfileName: string | undefined = undefined,
-        path="."
-    ){
+        path = "."
+    ) {
         logfileName = logfileName || Logger.generateDateString()
 
         return Logger.create(
             loggerName,
             Serializer.toChalk(
-                Output.CONSOLE,
-                Output.file(pj(path, logfileName + ".chalk.log"))
+                Output.file(pj(path, logfileName + ".chalk.log")),
+                Output.CONSOLE
             ),
             Serializer.toJSON(
                 Output.file(pj(logfileName + ".json.log"))
@@ -80,7 +80,7 @@ export class Logger {
         return new StatusLogger(this.s, Schema)
     }
 
-    static generateDateString(){
+    static generateDateString() {
         return new Date().toISOString().replace(/:/g, "-")
     }
 

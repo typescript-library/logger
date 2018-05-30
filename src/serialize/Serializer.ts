@@ -71,6 +71,7 @@ export function combine(...s: Array<Type>) {
     return new Combination(s)
 }
 
+// NOTICE: Serializer.forEach() could be catch. But we bet the serializer is exception-free
 export class Combination implements Type {
 
     constructor(

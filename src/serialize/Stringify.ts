@@ -3,7 +3,7 @@ import chalk from "chalk"
 import * as u from "../utils"
 import * as t from "../types"
 
-const c = new chalk.constructor({level: 1});
+const c = new chalk.constructor({ level: 1 });
 
 const DEFAULT_CHALK_LEVEL_MAP: { [index: number]: (msg: string) => string } = {
     0: c.green,
