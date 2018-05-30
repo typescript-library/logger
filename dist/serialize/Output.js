@@ -16,7 +16,14 @@ var Output;
     }
     Output.file = file;
     function combine(...outputs) {
-        return (msg) => outputs.forEach((e) => e(msg));
+        return (msg) => outputs.forEach((e) => {
+            try {
+                e(msg);
+            }
+            catch (err) {
+                console.error(err);
+            }
+        });
     }
     Output.combine = combine;
 })(Output = exports.Output || (exports.Output = {}));

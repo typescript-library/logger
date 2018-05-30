@@ -42,7 +42,7 @@ class Logger {
     }
     static createDefault(loggerName, logfileName = undefined, path = ".") {
         logfileName = logfileName || Logger.generateDateString();
-        return Logger.create(loggerName, Serializer.toChalk(Output_1.Output.CONSOLE, Output_1.Output.file(path_1.join(path, logfileName + ".chalk.log"))), Serializer.toJSON(Output_1.Output.file(path_1.join(logfileName + ".json.log"))));
+        return Logger.create(loggerName, Serializer.toChalk(Output_1.Output.file(path_1.join(path, logfileName + ".chalk.log")), Output_1.Output.CONSOLE), Serializer.toJSON(Output_1.Output.file(path_1.join(logfileName + ".json.log"))));
     }
     createChildLogger(name) {
         return new Logger([...this.nameList, name], this.s);

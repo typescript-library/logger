@@ -40,6 +40,7 @@ function combine(...s) {
     return new Combination(s);
 }
 exports.combine = combine;
+// NOTICE: Serializer.forEach() could be catch. But we bet the serializer is exception-free
 class Combination {
     constructor(s) {
         this.s = s;
